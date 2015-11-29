@@ -1,4 +1,4 @@
-docker: delivery/gocilla/DockerFile
+docker: delivery/gocilla/Dockerfile
 jobs:
   build: echo 'Building'
   test-component: echo 'Test component'
