@@ -5,8 +5,6 @@ COPY yum.repos.d /etc/yum.repos.d
 # Install EPEL repo
 RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
 
-RUN yum -y update
-
 # Install mongo
 # Also install docker utilities (to get the external IP and port)
 RUN yum install -y mongodb-org-3.0.7 mongodb-org-server-3.0.7 mongodb-org-shell-3.0.7 \
