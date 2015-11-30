@@ -23,14 +23,6 @@ RUN chmod 600 /home/contint/.ssh/tdaf.pem && \
 COPY openstack /home/contint/openstack
 RUN chown -R contint:contint /home/contint/openstack
 
-# Update npm (in 2 steps due to bug)
-RUN npm install -g npm@2.14.4 && \
-    npm install -g npm
-
-# Fix bug with libxmljs in tartare-chai (https://github.com/polotek/libxmljs/issues/253)
-RUN npm config set registry http://artifactory.hi.inet/npm && \
-    npm install -g node-gyp
-
 #############################################
 # Install node 4
 #############################################
