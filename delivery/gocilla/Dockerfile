@@ -32,13 +32,8 @@ RUN npm config set registry http://artifactory.hi.inet/npm && \
     npm install -g node-gyp
 
 #############################################
-# Install nvm
-# Preinstalled with 0.10, 0.12 and 4 versions
+# Install node 4
 #############################################
-RUN su - contint -c " \
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.28.0/install.sh | bash && \
-    . ~/.nvm/nvm.sh && \
-    nvm install 0.10 && \
-    nvm install 0.12 && \
-    nvm install 4 \
-    "
+RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
+    yum install -y nodejs && \
+    yum install gcc-c++ make
