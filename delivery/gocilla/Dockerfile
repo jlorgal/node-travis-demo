@@ -28,4 +28,7 @@ RUN chown -R contint:contint /home/contint/openstack
 #############################################
 RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
     yum install -y nodejs \
-    			gcc-c++ make
+    			   gcc-c++ make
+
+# Force a foreground task to prevent from stopping the container
+CMD ["tail", "-f", "/dev/null"]
