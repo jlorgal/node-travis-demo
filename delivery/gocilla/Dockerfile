@@ -2,12 +2,17 @@ FROM centos
 
 # Copy repos (to install mongodb)
 COPY yum.repos.d /etc/yum.repos.d
+# Install EPEL repo
+RUN rpm -iUvh http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-5.noarch.rpm
+
+RUN yum -y update
 
 # Install mongo
 # Also install docker utilities (to get the external IP and port)
 RUN yum install -y mongodb-org-3.0.7 mongodb-org-server-3.0.7 mongodb-org-shell-3.0.7 \
                    git tar gettext \
                    libxml2-devel libxslt-devel \
+                   python-pip \
                    docker-io && \
     yum clean all
 
@@ -33,8 +38,7 @@ RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
 #############################################
 # Create a virtual environment with ansible 2
 #############################################
-RUN easy_install pip && \
-    pip install virtualenv
+RUN pip install virtualenv
 
 RUN su - contint -c " \
     virtualenv -p python ansible && \
