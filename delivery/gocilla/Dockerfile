@@ -6,7 +6,7 @@ COPY yum.repos.d /etc/yum.repos.d
 # Install mongo
 # Also install docker utilities (to get the external IP and port)
 RUN yum install -y mongodb-org-3.0.7 mongodb-org-server-3.0.7 mongodb-org-shell-3.0.7 \
-                   tar gettext \
+                   git tar gettext \
                    libxml2-devel libxslt-devel \
                    docker-io && \
     yum clean all
@@ -29,6 +29,51 @@ RUN chown -R contint:contint /home/contint/openstack
 RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
     yum install -y nodejs \
     			   gcc-c++ make
+
+#############################################
+# Create a virtual environment with ansible 2
+#############################################
+RUN easy_install pip && \
+    pip install virtualenv
+
+RUN su - contint -c " \
+    virtualenv -p python ansible && \
+    source ansible/bin/activate && \
+    pip install --upgrade pip && \
+    pip install paramiko==1.15.2 PyYAML==3.11 Jinja2==2.8 httplib2==0.9.1 six==1.9.0 shade==0.13.0 shade-ansible==0.1.0 \
+    "
+
+RUN su - contint -c " \
+    git clone git@github.com:ansible/ansible.git ansible2-git && \
+    cd ansible2-git && \
+    git checkout v2.0.0-0.3.beta1 && \
+    git submodule update --init --recursive && \
+    source ./hacking/env-setup -q \
+    "
+
+#############################################
+# Install jmeter for performance testing
+#############################################
+RUN su - contint -c " \
+    wget http://apache.rediris.es//jmeter/binaries/apache-jmeter-2.13.tgz && \
+    tar -xzf apache-jmeter-2.13.tgz && \
+    rm apache-jmeter-2.13.tgz && \
+    wget http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-1.3.1.zip && \
+    unzip -o JMeterPlugins-Standard-1.3.1.zip -d apache-jmeter-2.13 && \
+    rm JMeterPlugins-Standard-1.3.1.zip && \
+    wget http://jmeter-plugins.org/downloads/file/JMeterPlugins-Extras-1.3.1.zip && \
+    unzip -o JMeterPlugins-Extras-1.3.1.zip -d apache-jmeter-2.13 && \
+    rm JMeterPlugins-Extras-1.3.1.zip \
+    "
+RUN ln -s /home/contint/apache-jmeter-2.13/bin/jmeter /usr/local/bin/jmeter
+
+#############################################
+
+# Ports exposing the service out of the container (range 4990 to 4999).
+# If the component is listening to a diferent port, it needs to be mapped with iptables.
+# For example, if component service is available at port 4010:
+#   iptables -t nat -I PREROUTING -p tcp --dport 4990 -j REDIRECT --to-port 4010
+EXPOSE 4990 4991 4992 4993 4994 4995 4996 4997 4998 4999
 
 # Force a foreground task to prevent from stopping the container
 CMD ["tail", "-f", "/dev/null"]
