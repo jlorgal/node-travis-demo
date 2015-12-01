@@ -45,14 +45,6 @@ RUN su - contint -c " \
     pip install paramiko==1.15.2 PyYAML==3.11 Jinja2==2.8 httplib2==0.9.1 six==1.9.0 shade==0.13.0 shade-ansible==0.1.0 \
     "
 
-RUN su - contint -c " \
-    git clone git@github.com:ansible/ansible.git ansible2-git && \
-    cd ansible2-git && \
-    git checkout v2.0.0-0.3.beta1 && \
-    git submodule update --init --recursive && \
-    source ./hacking/env-setup -q \
-    "
-
 #############################################
 
 # Ports exposing the service out of the container (range 4990 to 4999).
