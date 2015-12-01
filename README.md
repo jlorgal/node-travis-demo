@@ -1,5 +1,7 @@
 # node-travis-demo
 
+This is for testing purposes exclusively!
+
 Testing travis.
 
 [![Build Status](https://travis-ci.org/jlorgal/node-travis-demo.svg)](https://travis-ci.org/jlorgal/node-travis-demo)
