@@ -38,36 +38,20 @@ RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
 #############################################
 RUN pip install virtualenv
 
-RUN su - contint -c " \
-    virtualenv -p python ansible && \
-    source ansible/bin/activate && \
-    pip install --upgrade pip && \
-    pip install paramiko==1.15.2 PyYAML==3.11 Jinja2==2.8 httplib2==0.9.1 six==1.9.0 shade==0.13.0 shade-ansible==0.1.0 \
-    "
+#RUN su - contint -c " \
+#    virtualenv -p python ansible && \
+#    source ansible/bin/activate && \
+#    pip install --upgrade pip && \
+#    pip install paramiko==1.15.2 PyYAML==3.11 Jinja2==2.8 httplib2==0.9.1 six==1.9.0 shade==0.13.0 shade-ansible==0.1.0 \
+#    "
 
-RUN su - contint -c " \
-    git clone git@github.com:ansible/ansible.git ansible2-git && \
-    cd ansible2-git && \
-    git checkout v2.0.0-0.3.beta1 && \
-    git submodule update --init --recursive && \
-    source ./hacking/env-setup -q \
-    "
-
-#############################################
-# Install jmeter for performance testing
-#############################################
-RUN su - contint -c " \
-    wget http://apache.rediris.es//jmeter/binaries/apache-jmeter-2.13.tgz && \
-    tar -xzf apache-jmeter-2.13.tgz && \
-    rm apache-jmeter-2.13.tgz && \
-    wget http://jmeter-plugins.org/downloads/file/JMeterPlugins-Standard-1.3.1.zip && \
-    unzip -o JMeterPlugins-Standard-1.3.1.zip -d apache-jmeter-2.13 && \
-    rm JMeterPlugins-Standard-1.3.1.zip && \
-    wget http://jmeter-plugins.org/downloads/file/JMeterPlugins-Extras-1.3.1.zip && \
-    unzip -o JMeterPlugins-Extras-1.3.1.zip -d apache-jmeter-2.13 && \
-    rm JMeterPlugins-Extras-1.3.1.zip \
-    "
-RUN ln -s /home/contint/apache-jmeter-2.13/bin/jmeter /usr/local/bin/jmeter
+#RUN su - contint -c " \
+#    git clone git@github.com:ansible/ansible.git ansible2-git && \
+#    cd ansible2-git && \
+#    git checkout v2.0.0-0.3.beta1 && \
+#    git submodule update --init --recursive && \
+#    source ./hacking/env-setup -q \
+#    "
 
 #############################################
 
