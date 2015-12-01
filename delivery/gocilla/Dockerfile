@@ -46,7 +46,7 @@ RUN su - contint -c " \
     "
 
 RUN su - contint -c " \
-    git clone git@github.com:ansible/ansible.git ansible2-git && \
+    git clone https://github.com/ansible/ansible.git ansible2-git && \
     cd ansible2-git && \
     git checkout v2.0.0-0.3.beta1 && \
     git submodule update --init --recursive && \
