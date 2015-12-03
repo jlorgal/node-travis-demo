@@ -1,16 +1,32 @@
 docker: delivery/gocilla/Dockerfile
 jobs:
-  build: echo 'Building'
+  build: echo 'Building ${ENVIRONMENT}'
   test-component: echo 'Test component'
   package: echo 'Package'
   publish: echo 'Publish'
+  deploy: echo 'Deploy'
   test-e2e: echo 'Test E2E'
 pipelines:
+  - name: pipeline-pull
+    jobs:
+      - build
+      - test-component
   - name: pipeline-ci
     jobs:
       - build
       - test-component
       - package
       - publish
+      - deploy
+  - name: pipeline-pre
+    jobs:
+      - build
+      - test-component
+      - package
+      - publish
+      - deploy
       - test-e2e
-
+  - name: pipeline-pro
+    jobs:
+      - deploy
+      - test-e2e
