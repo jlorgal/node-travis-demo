@@ -10,10 +10,12 @@ jobs:
 pipelines:
   - name: pipeline-pull
     jobs:
+      - environment
       - build
       - test-component
   - name: pipeline-ci
     jobs:
+      - environment
       - build
       - test-component
       - package
@@ -21,6 +23,7 @@ pipelines:
       - deploy
   - name: pipeline-pre
     jobs:
+      - environment
       - build
       - test-component
       - package
@@ -29,5 +32,6 @@ pipelines:
       - test-e2e
   - name: pipeline-pro
     jobs:
+      - environment
       - deploy
       - test-e2e
