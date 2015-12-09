@@ -1,7 +1,7 @@
 docker: delivery/gocilla/Dockerfile
 jobs:
   environment: env
-  build: echo 'Building'
+  build: npm install
   test-component: echo 'Test component'
   package: echo 'Package'
   publish: echo 'Publish'
