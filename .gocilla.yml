@@ -1,4 +1,6 @@
-docker: delivery/gocilla/Dockerfile
+docker:
+  file: delivery/gocilla/Dockerfile
+  user: contint
 jobs:
   environment: env
   build: echo 'Building'
