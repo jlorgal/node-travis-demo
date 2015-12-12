@@ -62,4 +62,4 @@ RUN su - contint -c " \
 EXPOSE 4990 4991 4992 4993 4994 4995 4996 4997 4998 4999
 
 # Force a foreground task to prevent from stopping the container
-CMD ["tail", "-f", "/dev/null"]
+#CMD ["tail", "-f", "/dev/null"]
