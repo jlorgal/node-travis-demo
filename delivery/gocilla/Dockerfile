@@ -32,7 +32,7 @@ RUN chown -R contint:contint /home/contint/openstack
 #############################################
 # Install node
 #############################################
-RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
+RUN curl -sL https://rpm.nodesource.com/setup_0.12 | bash - && \
     yum install -y nodejs gcc-c++ make
 
 #############################################
