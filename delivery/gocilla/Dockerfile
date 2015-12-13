@@ -3,6 +3,9 @@ FROM centos
 # Create contint user and group
 RUN useradd -U contint
 
+# Create working dir
+RUN su - contint -c "mkdir /home/contint/gocilla"
+
 # Copy repos (to install mongodb)
 COPY yum.repos.d /etc/yum.repos.d
 # Install EPEL repo
