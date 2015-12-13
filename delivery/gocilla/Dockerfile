@@ -29,9 +29,8 @@ RUN chown -R contint:contint /home/contint/openstack
 #############################################
 # Install node 4
 #############################################
-RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
-    yum install -y nodejs \
-    			   gcc-c++ make
+RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
+    yum install -y nodejs gcc-c++ make
 
 #############################################
 # Create a virtual environment with ansible 2
