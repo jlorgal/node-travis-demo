@@ -3,7 +3,7 @@ docker:
   user: contint
   workingDir: /home/contint/gocilla
 jobs:
-  environment: env
+  environment: echo $ENVIRONMENT
   build: npm install -ddd
   test-component: echo 'Test component'
   package: echo 'Package'
