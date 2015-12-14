@@ -3,6 +3,9 @@ FROM centos
 # Create contint user and group
 RUN useradd -U contint
 
+# Create working dir
+RUN su - contint -c "mkdir /home/contint/gocilla"
+
 # Copy repos (to install mongodb)
 COPY yum.repos.d /etc/yum.repos.d
 # Install EPEL repo
@@ -29,7 +32,7 @@ RUN chown -R contint:contint /home/contint/openstack
 #############################################
 # Install node 4
 #############################################
-RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
+RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
     yum install -y nodejs gcc-c++ make
 
 #############################################
