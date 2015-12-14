@@ -30,9 +30,9 @@ COPY openstack /home/contint/openstack
 RUN chown -R contint:contint /home/contint/openstack
 
 #############################################
-# Install node
+# Install node 4
 #############################################
-RUN curl -sL https://rpm.nodesource.com/setup | bash - && \
+RUN curl -sL https://rpm.nodesource.com/setup_4.x | bash - && \
     yum install -y nodejs gcc-c++ make
 
 #############################################
