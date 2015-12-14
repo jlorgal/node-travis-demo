@@ -4,7 +4,7 @@ docker:
   workingDir: /home/contint/gocilla
 jobs:
   environment: echo $ENVIRONMENT
-  build: npm install -ddd
+  build: npm install
   test-component: echo 'Test component'
   package: echo 'Package'
   publish: echo 'Publish'
